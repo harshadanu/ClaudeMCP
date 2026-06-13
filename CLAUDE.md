@@ -57,8 +57,11 @@ AI Client → POST /mcp → StreamableHTTPServerTransport → McpServer → tool
 |------|-------|-------------|
 | `get_locations` | `userLatitude?`, `userLongitude?`, `category?` | 7 Moro Hub locations — HQ, data centres, Cyber Defence Centre, customer centres, Abu Dhabi office. Sorts by distance if coordinates given. |
 | `get_services` | `category?` | 15 Moro Hub services across 6 categories: Cloud Services, Data Centre, Cybersecurity, Managed Services, Smart City & IoT, Professional Services. |
+| `get_data_centre_status` | `facility?` | Live operational status of all 3 data centre facilities — uptime, PUE, rack availability, active incidents, sustainability metrics. |
+| `get_support_options` | `type?` | All Moro Hub support channels — 24/7 emergency hotlines, SOC contact, customer support, email, portal, sales. Includes SLA tiers. |
+| `get_news` | `category?`, `limit?` | Latest Moro Hub news, partnerships, awards, and press releases. Filter by category: Award, Partnership, Product Launch, Certification, Expansion. |
 
-Both tools return:
+All tools return:
 ```js
 {
   content: [{ type: "text", text: "..." }],   // for Claude / non-ChatGPT clients
@@ -83,6 +86,20 @@ Both tools return:
 - **Customer Centre** — DIFC Customer Experience Centre
 - **Innovation Centre** — Smart City Innovation Lab, Dubai Future District
 - **Regional Office** — Abu Dhabi (Hub71, Al Maryah Island)
+
+## Data Centre Status Fields
+
+Each facility returns: `status`, `uptime`, `uptimeDays`, `tier`, `powerSource`, `pue`, `temperature`, `humidity`, `totalRacks`, `availableRacks`, `occupancyPercent`, `activeIncidents`, `certifications`
+
+## Support SLA Tiers
+
+- **Platinum** — 99.999% SLA, 15-min response, 24/7 dedicated
+- **Gold** — 99.99% SLA, 1-hour response, 24/7 shared
+- **Silver** — 99.9% SLA, 4-hour response, business hours
+
+## News Categories
+
+`Award` · `Partnership` · `Product Launch` · `Certification` · `Expansion`
 
 ## Adding a New Tool
 

@@ -4,30 +4,50 @@ This directory configures Claude Code's behaviour when working in this repositor
 
 ## Hooks (`settings.json`)
 
-Hooks are shell commands Claude Code runs automatically — no manual trigger needed.
+Hooks are shell commands Claude Code runs **automatically** — no manual trigger needed.
 
-| Hook | Trigger | What it does |
-|------|---------|-------------|
-| `PreToolUse` on Bash | Before any shell command | Logs the command to `logs/claude-activity.log` |
-| `PostToolUse` on Write | After Claude writes a file | Logs file path + timestamp |
-| `PostToolUse` on Edit | After Claude edits a file | Logs file path + timestamp |
-| `Stop` | When Claude ends a session | Logs session end time |
+| Event | Trigger | What it logs |
+|-------|---------|-------------|
+| `PreToolUse` → Bash | Before Claude runs any shell command | The command text (first 80 chars) |
+| `PostToolUse` → Write | After Claude creates a file | File path + timestamp |
+| `PostToolUse` → Edit | After Claude edits a file | File path + timestamp |
+| `Stop` | When Claude ends a session | Session end timestamp |
 
-Activity log: `logs/claude-activity.log`
+All activity is appended to `logs/claude-activity.log`.
+
+---
 
 ## Slash Commands (`commands/`)
 
-| Command | Usage | What it does |
-|---------|-------|-------------|
-| `/status` | `/status` | Check if server is running, show recent logs |
-| `/tools` | `/tools` | List all Moro Hub tools and live-test them |
-| `/add-tool` | `/add-tool announcements` | Scaffold a new tool and register it |
-| `/logs` | `/logs` | Show formatted server and activity logs |
+Type these directly in the Claude Code prompt:
+
+| Command | Example | What it does |
+|---------|---------|-------------|
+| `/status` | `/status` | Checks if the server is running on :8787, shows recent log errors |
+| `/tools` | `/tools` | Lists all 5 tools, live-tests each one against the running server |
+| `/add-tool` | `/add-tool announcements` | Scaffolds a new Moro Hub tool file + registers it in index.js |
+| `/logs` | `/logs` | Shows today's server log + Claude activity log, highlights errors |
+
+---
 
 ## Agents (`agents/`)
 
-| Agent | How to invoke | Purpose |
-|-------|--------------|---------|
-| `tool-tester` | `Run the tool-tester agent` | Tests all tools, produces pass/fail report |
-| `server-monitor` | `Run the server-monitor agent` | Full health check — process, endpoint, MCP handshake, logs |
-| `data-updater` | `Run the data-updater agent to add a new Moro Hub location called ...` | Safely updates locations or services data |
+Invoke these by telling Claude to run them by name:
+
+| Agent | How to invoke | What it does |
+|-------|--------------|-------------|
+| `tool-tester` | `Run the tool-tester agent` | Runs 11 test cases across all 5 tools, produces a pass/fail table |
+| `server-monitor` | `Run the server-monitor agent` | Full health check: process, HTTP endpoint, MCP handshake, tools count, logs, env |
+| `data-updater` | `Run the data-updater agent to add a new news article about...` | Safely edits data arrays in any of the 5 tool files |
+
+---
+
+## Tools covered
+
+| Tool file | Data array | Records |
+|-----------|-----------|---------|
+| `get-locations.js` | `MORO_HUB_LOCATIONS` | 7 UAE facilities |
+| `get-services.js` | `MORO_HUB_SERVICES` | 15 services across 6 categories |
+| `get-data-centre-status.js` | `DATA_CENTRE_STATUS.facilities` | 3 DC facilities with live-feel metrics |
+| `get-support-options.js` | `SUPPORT_OPTIONS` | 7 support channels + 3 SLA tiers |
+| `get-news.js` | `MORO_HUB_NEWS` | 6 news articles (partnerships, awards, launches) |

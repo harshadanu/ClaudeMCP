@@ -26,19 +26,27 @@ curl -s -X POST http://localhost:8787/mcp \
   -H "accept: application/json, text/event-stream" \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"monitor","version":"1.0"}}}'
 ```
-Check for a valid `result` with `serverInfo.name: "morohub-mcp-server"`.
+Check for `serverInfo.name: "morohub-mcp-server"`.
 
-### 4. Log Analysis
+### 4. Tools Count Check
+```bash
+curl -s -X POST http://localhost:8787/mcp \
+  -H "content-type: application/json" \
+  -H "accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}'
+```
+Expect exactly **5 tools**: get_locations, get_services, get_data_centre_status, get_support_options, get_news.
+
+### 5. Log Analysis
 ```bash
 tail -50 logs/$(date +%Y-%m-%d).log 2>/dev/null || echo "No log file"
 ```
 Count ERRORs and WARNINGs. Extract last 3 tool invocations.
 
-### 5. Environment Check
+### 6. Environment Check
 ```bash
 node -e "import('dotenv/config').then(()=>console.log(JSON.stringify({PORT:process.env.PORT,NODE_ENV:process.env.NODE_ENV})))"
 ```
-Confirm environment variables are loaded correctly.
 
 ## Status Report Format
 
@@ -48,13 +56,17 @@ Generated: {timestamp}
 
 ### Overall Status: ✅ HEALTHY | ⚠️ DEGRADED | ❌ DOWN
 
-| Check              | Result  | Detail                    |
-|--------------------|---------|---------------------------|
-| Process            | ✅/❌   | PID or "not running"      |
-| HTTP Endpoint      | ✅/❌   | Status code               |
-| MCP Handshake      | ✅/❌   | serverInfo name + version |
-| Log Errors (today) | ✅/⚠️  | Count                     |
-| Environment        | ✅/❌   | Key vars present          |
+| Check              | Result  | Detail                        |
+|--------------------|---------|-------------------------------|
+| Process            | ✅/❌   | PID or "not running"          |
+| HTTP Endpoint      | ✅/❌   | Status code                   |
+| MCP Handshake      | ✅/❌   | serverInfo name + version     |
+| Tools Registered   | ✅/❌   | Count (expect 5)              |
+| Log Errors (today) | ✅/⚠️  | Count                         |
+| Environment        | ✅/❌   | Key vars present              |
+
+### Tools Available
+{list tool names from tools/list response}
 
 ### Recent Activity
 {last 3 log entries}

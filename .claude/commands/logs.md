@@ -1,4 +1,4 @@
-Show recent server and activity logs for the Demo MCP Server.
+Show recent server and activity logs for the Moro Hub MCP Server.
 
 1. Find today's server log:
    - Run: `ls -la logs/ 2>/dev/null || echo "No logs directory found"`
