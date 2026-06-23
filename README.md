@@ -1,6 +1,6 @@
-# Moro Hub MCP Server
+# TechHub MCP Server
 
-A fully functional **Model Context Protocol (MCP) server** built with Node.js, exposing Moro Hub's services, facilities, and operational data as AI-callable tools. Connect it to Claude, ChatGPT, or any MCP-compatible AI client and ask natural language questions about Moro Hub.
+A fully functional **Model Context Protocol (MCP) server** built with Node.js, exposing TechHub's services, facilities, and operational data as AI-callable tools. Connect it to Claude, ChatGPT, or any MCP-compatible AI client and ask natural language questions about TechHub.
 
 > Built as part of the **Anthropic Cohort Alpha** application — demonstrating all 4 Level 1 modules:
 > Agent Skills · Building with the Claude API · Introduction to MCP · Claude Code in Action
@@ -12,12 +12,12 @@ A fully functional **Model Context Protocol (MCP) server** built with Node.js, e
 Once connected to an AI client, you can ask:
 
 ```
-"What services does Moro Hub offer?"
+"What services does TechHub offer?"
 "Is the Solar Park data centre operational right now?"
 "What cybersecurity services are available?"
-"Show me Moro Hub locations near DIFC"
-"How do I contact Moro Hub support in an emergency?"
-"What's the latest news from Moro Hub?"
+"Show me TechHub locations near DIFC"
+"How do I contact TechHub support in an emergency?"
+"What's the latest news from TechHub?"
 "Show me all partnership announcements"
 ```
 
@@ -36,14 +36,14 @@ cp .env.example .env
 
 # Start the server (development)
 npm run dev
-# → Moro Hub MCP Server listening on http://localhost:8787/mcp
+# → TechHub MCP Server listening on http://localhost:8787/mcp
 ```
 
 ### Connect to Claude Code
 
 ```bash
-claude mcp add --transport http morohub http://localhost:8787/mcp
-claude mcp list   # → morohub: http://localhost:8787/mcp (HTTP) - ✓ Connected
+claude mcp add --transport http techhub http://localhost:8787/mcp
+claude mcp list   # → techhub: http://localhost:8787/mcp (HTTP) - ✓ Connected
 ```
 
 ### Connect to Claude Desktop
@@ -52,7 +52,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "morohub": {
+    "techhub": {
       "url": "http://localhost:8787/mcp"
     }
   }
@@ -65,7 +65,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 | Tool | Parameters | Description |
 |------|-----------|-------------|
-| `get_locations` | `userLatitude?` `userLongitude?` `category?` | 7 Moro Hub UAE facilities. Sorts by distance if coordinates provided. |
+| `get_locations` | `userLatitude?` `userLongitude?` `category?` | 7 TechHub UAE facilities. Sorts by distance if coordinates provided. |
 | `get_services` | `category?` | 15 services across 6 categories — Cloud, Data Centre, Cybersecurity, Managed Services, Smart City & IoT, Professional Services. |
 | `get_data_centre_status` | `facility?` | Live-feel operational status of all 3 DC facilities — uptime, PUE, rack availability, incidents, sustainability metrics. |
 | `get_support_options` | `type?` | 7 support channels — 24/7 emergency hotlines, SOC contact, portal, sales. Includes SLA tiers. |
@@ -86,18 +86,18 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ### Locations
 ```
-"Where is Moro Hub's headquarters?"
+"Where is TechHub's headquarters?"
 "Show me all data centre locations"
 "Find the Cyber Defence Centre"
-"Which Moro Hub facility is closest to me?"   ← Claude asks for your coordinates
+"Which TechHub facility is closest to me?"   ← Claude asks for your coordinates
 "Show locations filtered by Security Operations"
 ```
 
 ### Services
 ```
-"What cloud services does Moro Hub offer?"
+"What cloud services does TechHub offer?"
 "Tell me about the Managed SOC service"
-"Does Moro Hub offer cloud migration?"
+"Does TechHub offer cloud migration?"
 "What smart city solutions are available?"
 "List all professional services"
 ```
@@ -108,25 +108,25 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 "What's the uptime of the Solar Park facility?"
 "Show me rack availability across all facilities"
 "What certifications does the Solar Park DC hold?"
-"How much CO₂ has Moro Hub saved today?"
+"How much CO₂ has TechHub saved today?"
 ```
 
 ### Support
 ```
-"How do I contact Moro Hub support?"
+"How do I contact TechHub support?"
 "What's the emergency hotline number?"
 "How do I report a cyber incident?"
-"What are Moro Hub's SLA tiers?"
+"What are TechHub's SLA tiers?"
 "How do I book a visit to the data centre?"
 ```
 
 ### News
 ```
-"What's the latest news from Moro Hub?"
+"What's the latest news from TechHub?"
 "Show me recent partnership announcements"
-"Has Moro Hub won any awards?"
+"Has TechHub won any awards?"
 "Tell me about the Emirates Group partnership"
-"What new products has Moro Hub launched?"
+"What new products has TechHub launched?"
 ```
 
 ---
@@ -142,7 +142,7 @@ src/
 ├── tools/
 │   ├── index.js            # Registers all tools
 │   ├── get-locations.js    # 7 UAE facility locations
-│   ├── get-services.js     # 15 Moro Hub services
+│   ├── get-services.js     # 15 TechHub services
 │   ├── get-data-centre-status.js  # 3 DC facilities with metrics
 │   ├── get-support-options.js     # 7 support channels + SLA tiers
 │   └── get-news.js         # 6 news articles
@@ -173,7 +173,7 @@ This repo demonstrates Claude Code's full automation capabilities via the `.clau
 ```bash
 /status       # Is the server running? Any log errors?
 /tools        # List all 5 tools and live-test each one
-/add-tool     # Scaffold a new Moro Hub tool: /add-tool announcements
+/add-tool     # Scaffold a new TechHub tool: /add-tool announcements
 /logs         # Show server log + Claude activity log
 ```
 
@@ -233,4 +233,4 @@ npm start      # Start with INFO logging (NODE_ENV=production)
 
 ---
 
-*Built with Claude Code · Moro Hub MCP Server v1.0.0*
+*Built with Claude Code · TechHub MCP Server v1.0.0*

@@ -1,4 +1,4 @@
-# Claude Code Customizations — Moro Hub MCP Server
+# Claude Code Customizations — TechHub MCP Server
 
 This directory configures Claude Code's behaviour when working in this repository.
 
@@ -25,7 +25,7 @@ Type these directly in the Claude Code prompt:
 |---------|---------|-------------|
 | `/status` | `/status` | Checks if the server is running on :8787, shows recent log errors |
 | `/tools` | `/tools` | Lists all 5 tools, live-tests each one against the running server |
-| `/add-tool` | `/add-tool announcements` | Scaffolds a new Moro Hub tool file + registers it in index.js |
+| `/add-tool` | `/add-tool announcements` | Scaffolds a new TechHub tool file + registers it in index.js |
 | `/logs` | `/logs` | Shows today's server log + Claude activity log, highlights errors |
 
 ---

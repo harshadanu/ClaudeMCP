@@ -48,7 +48,7 @@ export async function startHttpServer(options = {}) {
 
     // Health check
     if (req.method === "GET" && url.pathname === "/") {
-      res.writeHead(200, { "content-type": "text/plain" }).end("Moro Hub MCP Server is running");
+      res.writeHead(200, { "content-type": "text/plain" }).end("TechHub MCP Server is running");
       logger.info("Health check", { status: 200 });
       return;
     }
@@ -100,6 +100,6 @@ export async function startHttpServer(options = {}) {
   });
 
   httpServer.listen(port, () => {
-    logger.info(`Moro Hub MCP Server listening on http://localhost:${port}${MCP_PATH}`);
+    logger.info(`TechHub MCP Server listening on http://localhost:${port}${MCP_PATH}`);
   });
 }

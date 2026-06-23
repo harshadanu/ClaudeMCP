@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Project Is
 
-A **Moro Hub MCP (Model Context Protocol) server** built with Node.js. It exposes AI-callable tools that let AI assistants (Claude, ChatGPT, and other MCP clients) answer questions about Moro Hub's facilities and services.
+A **TechHub MCP (Model Context Protocol) server** built with Node.js. It exposes AI-callable tools that let AI assistants (Claude, ChatGPT, and other MCP clients) answer questions about TechHub's facilities and services.
 
-**About Moro Hub:** Moro Hub operates the world's largest solar-powered data centre (Guinness World Record certified) at the Mohammed bin Rashid Al Maktoum Solar Park. It provides cloud services, data centre colocation, cybersecurity (24/7 SOC), managed services, and smart city solutions across the UAE.
+**About TechHub:** TechHub operates the world's largest solar-powered data centre (Guinness World Record certified) at the Mohammed bin Rashid Al Maktoum Solar Park. It provides cloud services, data centre colocation, cybersecurity (24/7 SOC), managed services, and smart city solutions across the UAE.
 
 All tool responses use hardcoded demo data — there are no external API calls or authentication dependencies.
 
@@ -58,11 +58,11 @@ AI Client → POST /mcp → StreamableHTTPServerTransport → McpServer → tool
 
 | Tool | Input | Description |
 |------|-------|-------------|
-| `get_locations` | `userLatitude?`, `userLongitude?`, `category?` | 7 Moro Hub locations — HQ, data centres, Cyber Defence Centre, customer centres, Abu Dhabi office. Sorts by distance if coordinates given. |
-| `get_services` | `category?` | 15 Moro Hub services across 6 categories: Cloud Services, Data Centre, Cybersecurity, Managed Services, Smart City & IoT, Professional Services. |
+| `get_locations` | `userLatitude?`, `userLongitude?`, `category?` | 7 TechHub locations — HQ, data centres, Cyber Defence Centre, customer centres, Abu Dhabi office. Sorts by distance if coordinates given. |
+| `get_services` | `category?` | 15 TechHub services across 6 categories: Cloud Services, Data Centre, Cybersecurity, Managed Services, Smart City & IoT, Professional Services. |
 | `get_data_centre_status` | `facility?` | Live operational status of all 3 data centre facilities — uptime, PUE, rack availability, active incidents, sustainability metrics. |
-| `get_support_options` | `type?` | All Moro Hub support channels — 24/7 emergency hotlines, SOC contact, customer support, email, portal, sales. Includes SLA tiers. |
-| `get_news` | `category?`, `limit?` | Latest Moro Hub news, partnerships, awards, and press releases. Filter by category: Award, Partnership, Product Launch, Certification, Expansion. |
+| `get_support_options` | `type?` | All TechHub support channels — 24/7 emergency hotlines, SOC contact, customer support, email, portal, sales. Includes SLA tiers. |
+| `get_news` | `category?`, `limit?` | Latest TechHub news, partnerships, awards, and press releases. Filter by category: Award, Partnership, Product Launch, Certification, Expansion. |
 
 All tools return:
 ```js
@@ -108,7 +108,7 @@ Each facility returns: `status`, `uptime`, `uptimeDays`, `tier`, `powerSource`, 
 
 1. Create `src/tools/my-tool.js` — export `registerMyTool(server)`
 2. Use `z.object({...}).strict()` for the Zod input schema
-3. Return hardcoded Moro Hub data; provide both text and `structuredContent`
+3. Return hardcoded TechHub data; provide both text and `structuredContent`
 4. Import and call `registerMyTool(server)` in `src/tools/index.js`
 
 ## Environment Variables
@@ -127,7 +127,7 @@ Copy `.env.example` to `.env` for local dev:
 ```json
 {
   "mcpServers": {
-    "morohub": {
+    "techhub": {
       "url": "http://localhost:8787/mcp"
     }
   }
@@ -136,7 +136,7 @@ Copy `.env.example` to `.env` for local dev:
 
 **Claude Code CLI:**
 ```bash
-claude mcp add morohub http://localhost:8787/mcp
+claude mcp add techhub http://localhost:8787/mcp
 ```
 
 **ChatGPT** — add `http://localhost:8787/mcp` as an MCP server in ChatGPT settings (requires public URL — use ngrok for local testing).

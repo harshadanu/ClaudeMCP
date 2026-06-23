@@ -1,13 +1,13 @@
 {
-  "name": "morohub-mcp-server",
+  "name": "techhub-mcp-server",
   "version": "1.0.0",
-  "description": "Moro Hub MCP (Model Context Protocol) server — AI-callable tools for Moro Hub services",
+  "description": "TechHub MCP (Model Context Protocol) server — AI-callable tools for TechHub services",
   "main": "src/server/app.js",
   "scripts": {
     "dev": "node src/server/app.js",
     "start": "NODE_ENV=production node src/server/app.js"
   },
-  "keywords": ["mcp", "model-context-protocol", "ai", "morohub", "digital-transformation"],
+  "keywords": ["mcp", "model-context-protocol", "ai", "techhub", "digital-transformation"],
   "author": "",
   "license": "ISC",
   "type": "module",

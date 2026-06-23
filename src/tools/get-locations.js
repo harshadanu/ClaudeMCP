@@ -16,11 +16,11 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-// Moro Hub facility and office locations across Dubai
-const MORO_HUB_LOCATIONS = [
+// TechHub facility and office locations across Dubai
+const TECHHUB_LOCATIONS = [
   {
     id: "loc-001",
-    name: "Moro Hub Headquarters",
+    name: "TechHub Headquarters",
     category: "Head Office",
     address: "Al Shifa Tower, Dubai Internet City, Dubai, UAE",
     latitude: "25.0953",
@@ -128,9 +128,9 @@ export const registerLocationsTools = (server) => {
   server.registerTool(
     "get_locations",
     {
-      title: "Get Moro Hub locations",
+      title: "Get TechHub locations",
       description:
-        "Returns Moro Hub facility and office locations across the UAE — data centres, the Cyber Defence Centre, customer experience centres, and regional offices. Optionally filter by category (e.g. 'Data Centre', 'Security Operations', 'Customer Centre'). If userLatitude and userLongitude are provided, locations are sorted by distance nearest first.",
+        "Returns TechHub facility and office locations across the UAE — data centres, the Cyber Defence Centre, customer experience centres, and regional offices. Optionally filter by category (e.g. 'Data Centre', 'Security Operations', 'Customer Centre'). If userLatitude and userLongitude are provided, locations are sorted by distance nearest first.",
       inputSchema,
       annotations: {
         readOnlyHint: true,
@@ -141,7 +141,7 @@ export const registerLocationsTools = (server) => {
     async (args) => {
       logger.info("get_locations tool invoked", args ?? {});
 
-      let locations = [...MORO_HUB_LOCATIONS];
+      let locations = [...TECHHUB_LOCATIONS];
 
       // Filter by category if provided
       if (args?.category) {
@@ -153,7 +153,7 @@ export const registerLocationsTools = (server) => {
 
       // Sort by distance if user coordinates provided
       if (args?.userLatitude !== undefined && args?.userLongitude !== undefined) {
-        logger.debug("Sorting Moro Hub locations by distance");
+        logger.debug("Sorting TechHub locations by distance");
         locations = locations.map((loc) => {
           const lat = parseFloat(loc.latitude);
           const lon = parseFloat(loc.longitude);
@@ -172,18 +172,18 @@ export const registerLocationsTools = (server) => {
 
       const message =
         locations.length > 0
-          ? `Found ${locations.length} Moro Hub location(s).${
+          ? `Found ${locations.length} TechHub location(s).${
               args?.userLatitude !== undefined && locations[0]?.distance != null
                 ? ` Nearest is ${locations[0].distance.toFixed(1)} km away.`
                 : ""
             }`
-          : "No Moro Hub locations found for that category.";
+          : "No TechHub locations found for that category.";
 
       locationsState = { status: "success", message, locations, selectedId: "" };
 
       let detailedMessage = message;
       if (!isChatGPT() && locations.length > 0) {
-        detailedMessage += "\n\nMoro Hub Locations:\n";
+        detailedMessage += "\n\nTechHub Locations:\n";
         locations.forEach((loc, i) => {
           detailedMessage += `\n${i + 1}. ${loc.name} [${loc.category}]`;
           if (loc.distance != null) {

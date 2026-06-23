@@ -5,7 +5,7 @@ import { logger } from "../utils/logger.js";
 // Creates a fresh McpServer instance per request (required by MCP SDK for stateless HTTP)
 export async function createMcpServer() {
   const server = new McpServer({
-    name: "morohub-mcp-server",
+    name: "techhub-mcp-server",
     version: "1.0.0",
   });
 

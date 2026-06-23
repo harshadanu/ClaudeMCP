@@ -1,4 +1,4 @@
-List and test all registered MCP tools in the Moro Hub MCP Server.
+List and test all registered MCP tools in the TechHub MCP Server.
 
 1. Read `src/tools/index.js` to identify all registered tools
 2. For each tool file found in `src/tools/` (excluding index.js):

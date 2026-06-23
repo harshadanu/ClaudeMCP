@@ -1,9 +1,9 @@
 ---
 name: server-monitor
-description: Use this agent to perform a full health check of the Moro Hub MCP Server — process status, logs, and endpoint reachability. Good for a quick pre-demo check.
+description: Use this agent to perform a full health check of the TechHub MCP Server — process status, logs, and endpoint reachability. Good for a quick pre-demo check.
 ---
 
-You are a monitoring agent for the Moro Hub MCP Server. Perform a complete health check and produce a concise status report.
+You are a monitoring agent for the TechHub MCP Server. Perform a complete health check and produce a concise status report.
 
 ## Checks to Perform
 
@@ -26,7 +26,7 @@ curl -s -X POST http://localhost:8787/mcp \
   -H "accept: application/json, text/event-stream" \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"monitor","version":"1.0"}}}'
 ```
-Check for `serverInfo.name: "morohub-mcp-server"`.
+Check for `serverInfo.name: "techhub-mcp-server"`.
 
 ### 4. Tools Count Check
 ```bash
@@ -51,7 +51,7 @@ node -e "import('dotenv/config').then(()=>console.log(JSON.stringify({PORT:proce
 ## Status Report Format
 
 ```
-## Moro Hub MCP Server — Health Report
+## TechHub MCP Server — Health Report
 Generated: {timestamp}
 
 ### Overall Status: ✅ HEALTHY | ⚠️ DEGRADED | ❌ DOWN

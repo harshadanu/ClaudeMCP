@@ -2,7 +2,7 @@ import { z } from "zod";
 import { logger } from "../utils/logger.js";
 import { isChatGPT } from "../utils/client-detector.js";
 
-// Hardcoded demo status for Moro Hub data centre facilities
+// Hardcoded demo status for TechHub data centre facilities
 const DATA_CENTRE_STATUS = {
   lastUpdated: "2026-06-13T18:00:00Z",
   overallStatus: "Operational",
@@ -96,7 +96,7 @@ export const registerDataCentreStatusTools = (server) => {
     {
       title: "Get data centre status",
       description:
-        "Returns live operational status of Moro Hub's data centre facilities — uptime, PUE, rack availability, active incidents, power source, and sustainability metrics. Optionally filter by facility name.",
+        "Returns live operational status of TechHub's data centre facilities — uptime, PUE, rack availability, active incidents, power source, and sustainability metrics. Optionally filter by facility name.",
       inputSchema,
       annotations: {
         readOnlyHint: true,
@@ -120,7 +120,7 @@ export const registerDataCentreStatusTools = (server) => {
       const hasIncidents = facilities.some((f) => f.activeIncidents > 0);
       const message = hasIncidents
         ? `⚠️ ${facilities.filter((f) => f.activeIncidents > 0).length} facility has active incidents.`
-        : `All ${facilities.length} Moro Hub data centre facilities are fully operational.`;
+        : `All ${facilities.length} TechHub data centre facilities are fully operational.`;
 
       const data = { ...DATA_CENTRE_STATUS, facilities };
 

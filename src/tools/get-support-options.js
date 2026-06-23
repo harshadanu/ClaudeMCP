@@ -2,13 +2,13 @@ import { z } from "zod";
 import { logger } from "../utils/logger.js";
 import { isChatGPT } from "../utils/client-detector.js";
 
-// Moro Hub support channels and contact options
+// TechHub support channels and contact options
 const SUPPORT_OPTIONS = [
   {
     id: "sup-001",
     type: "Emergency Hotline",
     title: "24/7 Data Centre Emergency",
-    description: "For critical infrastructure incidents, power outages, or physical security issues at any Moro Hub facility.",
+    description: "For critical infrastructure incidents, power outages, or physical security issues at any TechHub facility.",
     contact: "+971 4 601 9911",
     availability: "24/7 — Always On",
     responseTarget: "Immediate",
@@ -18,7 +18,7 @@ const SUPPORT_OPTIONS = [
     id: "sup-002",
     type: "SOC Emergency",
     title: "Cyber Defence Hotline",
-    description: "Report active cyber incidents, breaches, ransomware, or critical security alerts to the Moro Hub Security Operations Centre.",
+    description: "Report active cyber incidents, breaches, ransomware, or critical security alerts to the TechHub Security Operations Centre.",
     contact: "+971 4 601 9999",
     availability: "24/7 — Always On",
     responseTarget: "Under 15 minutes",
@@ -39,7 +39,7 @@ const SUPPORT_OPTIONS = [
     type: "Email",
     title: "Support Email",
     description: "Submit support requests, attach logs or screenshots, and track your case via email.",
-    contact: "support@morohub.com",
+    contact: "support@techhub.com",
     availability: "Monitored 24/7",
     responseTarget: "Under 8 hours",
     icon: "mail",
@@ -49,7 +49,7 @@ const SUPPORT_OPTIONS = [
     type: "Support Portal",
     title: "Online Support Portal",
     description: "Create and track tickets, access the knowledge base, download SLA reports, and manage your support cases online.",
-    contact: "https://support.morohub.com",
+    contact: "https://support.techhub.com",
     availability: "24/7 self-service",
     responseTarget: "Instant ticket creation",
     icon: "monitor",
@@ -59,7 +59,7 @@ const SUPPORT_OPTIONS = [
     type: "Sales & Partnerships",
     title: "Sales Enquiries",
     description: "New service enquiries, partnership proposals, procurement, and commercial discussions.",
-    contact: "sales@morohub.com",
+    contact: "sales@techhub.com",
     availability: "Sun–Thu 08:00–18:00 GST",
     responseTarget: "Under 24 hours",
     icon: "briefcase",
@@ -69,7 +69,7 @@ const SUPPORT_OPTIONS = [
     type: "Visit Us",
     title: "Customer Experience Centre — DIFC",
     description: "Book an in-person consultation, solution demo, or facility tour at our DIFC Customer Experience Centre.",
-    contact: "https://www.morohub.com/en/visit-the-hub/",
+    contact: "https://www.techhub.com/en/visit-the-hub/",
     availability: "Sun–Thu 08:00–18:00 GST",
     responseTarget: "By appointment",
     icon: "map-pin",
@@ -115,9 +115,9 @@ export const registerSupportOptionsTools = (server) => {
   server.registerTool(
     "get_support_options",
     {
-      title: "Get Moro Hub support options",
+      title: "Get TechHub support options",
       description:
-        "Returns all Moro Hub support channels — emergency hotlines, SOC contact, customer support, email, online portal, and sales. Also includes SLA tier information. Optionally filter by type (e.g. 'Emergency', 'Email', 'Portal').",
+        "Returns all TechHub support channels — emergency hotlines, SOC contact, customer support, email, online portal, and sales. Also includes SLA tier information. Optionally filter by type (e.g. 'Emergency', 'Email', 'Portal').",
       inputSchema,
       annotations: {
         readOnlyHint: true,
@@ -140,12 +140,12 @@ export const registerSupportOptionsTools = (server) => {
 
       const message =
         options.length > 0
-          ? `Found ${options.length} Moro Hub support channel(s).`
+          ? `Found ${options.length} TechHub support channel(s).`
           : "No support options found for that type.";
 
       let detailedMessage = message;
       if (!isChatGPT() && options.length > 0) {
-        detailedMessage += "\n\nMoro Hub Support Channels:\n";
+        detailedMessage += "\n\nTechHub Support Channels:\n";
         options.forEach((o, i) => {
           detailedMessage += `\n${i + 1}. ${o.title} [${o.type}]`;
           detailedMessage += `\n   ${o.description}`;

@@ -1,9 +1,9 @@
 ---
 name: tool-tester
-description: Use this agent to automatically test all Moro Hub MCP tools and produce a health report. Invoke it when you want to verify the server is working correctly after changes.
+description: Use this agent to automatically test all TechHub MCP tools and produce a health report. Invoke it when you want to verify the server is working correctly after changes.
 ---
 
-You are a QA agent for the Moro Hub MCP Server. Your job is to test every registered tool and report results.
+You are a QA agent for the TechHub MCP Server. Your job is to test every registered tool and report results.
 
 ## Steps
 
