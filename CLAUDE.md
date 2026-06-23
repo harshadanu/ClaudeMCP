@@ -30,16 +30,19 @@ Server starts on `http://localhost:8787/mcp` by default. Override with `PORT` en
 ```
 src/
   server/
-    app.js          — Entry point: validates setup, starts HTTP server
-    mcp.js          — MCP server factory (new McpServer instance per request)
-    httpServer.js   — HTTP server, routes /mcp to MCP transport, health check at /
+    app.js              — Entry point: validates setup, starts HTTP server
+    mcp.js              — MCP server factory (new McpServer instance per request)
+    httpServer.js       — HTTP server, routes /mcp to MCP transport, health check at /
   tools/
-    index.js        — Registers all tools onto the server
-    get-locations.js — "get_locations" tool: Moro Hub facilities & offices across UAE
-    get-services.js  — "get_services" tool: Moro Hub services catalog (15 services)
+    index.js                  — Registers all tools onto the server
+    get-locations.js          — "get_locations" tool
+    get-services.js           — "get_services" tool
+    get-data-centre-status.js — "get_data_centre_status" tool
+    get-support-options.js    — "get_support_options" tool
+    get-news.js               — "get_news" tool
   utils/
-    logger.js       — File + console logger, daily log rotation (10 MB cap), logs/ dir
-    client-detector.js — Detects calling client (ChatGPT vs Claude) from user-agent
+    logger.js           — File + console logger, daily log rotation (10 MB cap), logs/ dir
+    client-detector.js  — Detects calling client (ChatGPT vs Claude) from user-agent
 ```
 
 **Request flow:**
